@@ -5,3 +5,7 @@ export interface IListProducts {
   price: number
   obj: string
 }
+
+export interface IListCart {
+  
+}

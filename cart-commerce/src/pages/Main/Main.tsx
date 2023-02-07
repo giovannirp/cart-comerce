@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { BsFillCartCheckFill, BsFillCartPlusFill } from 'react-icons/bs'
 import { getItem, setItem } from "../../hooks/LocalStorage"
 import { IListProducts } from "../../interface/produts.model";
+import { priceFormatter } from "../../ultis/formatter";
 import { CardList, ContainerMain, ContentMain } from "./styles"
 
 export function Main() {
@@ -40,7 +41,7 @@ export function Main() {
             <CardList key={item.id}>
               <h4>{item.title}</h4>
               <img src={item.thumbnail} alt="" />
-              <strong>{item.price}</strong>
+              <strong>{priceFormatter.format(item.price)}</strong>
               <button onClick={() => handleClick(item)}>
                 {cart.some((itemCart) => itemCart.id === item.id) ? (
                   <BsFillCartCheckFill />
