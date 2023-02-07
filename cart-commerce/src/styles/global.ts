@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -21,3 +21,33 @@ export const GlobalStyle = createGlobalStyle`
     font: 400 1rem Roboto, sans-serif;
   }
 `
+
+export const TableContainer = styled.table`
+  width: 100%;
+  margin-bottom: 30px;
+
+  thead {
+    th {
+      background-color: ${(props) => props.theme['gray-500']};
+      color: ${(props) => props.theme.white};
+      text-align: left;
+      padding: 10px;
+    }
+  }
+
+  tr:nth-child(even) {
+		background: ${(props) => props.theme['gray-100']};
+  }
+
+  td {
+    border-right: 1px solid ${(props) => props.theme["gray-400"]};
+    border-bottom: 1px solid ${(props) => props.theme["gray-400"]};
+    padding: 10px;
+  }
+
+
+
+  td:last-child {
+    border-right: none;
+  }
+`;
