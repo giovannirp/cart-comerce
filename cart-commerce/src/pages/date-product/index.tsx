@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getItem } from "../../hooks/LocalStorage";
+import { IListProducts, IStateCyty } from "../../interface/produts.model";
 import { TableContainer } from "../../styles/global";
 import { dataFormater } from "../../ultis/formatter";
 import { ButtonFilter, ContainerProduct, InitButton } from "./styles";
@@ -20,13 +20,14 @@ export function DateProduct() {
   };
 
   const [formState, setFormState] = useState(initialForm);
-  const [dateProduct, setDateProduct] = useState(getItem("cart-yt") || []);
+  const [dateProduct, setDateProduct] = useState<IStateCyty[]>([]);
 
   const filterStateSP = () => {
     const resultFilter = dateProduct.filter(
       (item) => item.seller_address.state.name === "São Paulo"
     );
     setDateProduct(resultFilter);
+    console.log("url")
   };
 
   const handleStateFilterSP = () => {
@@ -37,10 +38,17 @@ export function DateProduct() {
     window.location.reload();
   };
 
-  console.log(dateProduct)
-  // const filterList = dateProduct.filter((item) =>
-  //   item.includes(formState.filter)
-  // );
+  const fetchListDate = async () => {
+    const url = "https://api.mercadolibre.com/sites/MLB/search?q=celular";
+    const res = await fetch(url);
+    const objListJson = await res.json();
+    setDateProduct(objListJson.results)
+    console.log(url)
+  } 
+
+  useEffect(() => {
+    fetchListDate()
+  }, [])
 
   return (
     <ContainerProduct>

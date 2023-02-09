@@ -6,6 +6,10 @@ export interface IListProducts {
   obj: string
 }
 
-export interface IListCart {
-  
+export interface IStateCyty {
+  id: number
+  seller_address: string
+  stop_time: string
+  state: string
+  cyty: string
 }
