@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { InputText } from "../../Components/Input-text";
+import { v4 as uuidv4 } from "uuid";
 import { getItem, setItem } from "../../hooks/LocalStorage";
 import { TableContainer } from "../../styles/global";
-import { ContainerResgistration, FormContainer, FormControl } from "./styles";
+import { ContainerResgistration, FormContainer, FormControl, MessageWithout } from "./styles";
 
 export function Registration() {
   const initilForm = {
@@ -28,6 +28,7 @@ export function Registration() {
     event.preventDefault();
 
     const objectNew = {
+      id: uuidv4(),
       nome: formState.nome,
       phone: formState.phone,
       email: formState.email,
@@ -35,23 +36,24 @@ export function Registration() {
 
     setData([...data, objectNew]);
     setItem("registration", data);
+    console.log(data)
 
     SetFormState({ ...initilForm })
   };
 
   //carregar lista do storage
   useEffect(() => {
-    console.log(localStorage.getItem("registration"));
+    // console.log(localStorage.getItem("registration"));
     if (localStorage.getItem("registration") !== null) {
       //setData(JSON.parse(localStorage.getItem('registration'))
       setData(getItem("registration"));
     }
-    console.log(data);
   }, []);
 
   // atualiza a lista no storage
   useEffect(() => {
     localStorage.setItem("registration", JSON.stringify(data));
+    console.log(data)
   }, [data]);
 
   return (
@@ -88,6 +90,10 @@ export function Registration() {
             <button>Enviar</button>
           </FormControl>
         </FormContainer>
+
+        {data.length === 0 && (
+          <MessageWithout>Não existe, dados cadastrado!</MessageWithout>
+        )}
         <TableContainer>
           <thead>
             <tr>
