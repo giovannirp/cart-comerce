@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getItem, setItem } from "../../hooks/LocalStorage";
 import { ContainerResgistration } from "./styles";
 
@@ -22,7 +22,7 @@ export function Registration() {
     });
   };
 
-  const handleSubmit = useCallback((event: any) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
 
     const objectNew = {
@@ -34,8 +34,7 @@ export function Registration() {
     setData([...data, objectNew]);
 
     console.log(data)
-    setItem('registration', data)
-  }, [data]);
+  };
 
   return (
     <ContainerResgistration>
