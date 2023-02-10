@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { InputText } from "../../Components/Input-text";
 import { getItem, setItem } from "../../hooks/LocalStorage";
-import { ContainerResgistration } from "./styles";
+import { TableContainer } from "../../styles/global";
+import { ContainerResgistration, FormContainer, FormControl } from "./styles";
 
 export function Registration() {
   const initilForm = {
@@ -9,7 +11,7 @@ export function Registration() {
     email: "",
   };
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   const [formState, SetFormState] = useState(initilForm);
 
   const handleChange = (event: any) => {
@@ -28,33 +30,34 @@ export function Registration() {
     const objectNew = {
       nome: formState.nome,
       phone: formState.phone,
-      email: formState.email
-    }
+      email: formState.email,
+    };
 
     setData([...data, objectNew]);
-    setItem('registration', data)
+    setItem("registration", data);
+
+    SetFormState({ ...initilForm })
   };
 
   //carregar lista do storage
   useEffect(() => {
-    console.log(localStorage.getItem('registration'))
-    if(localStorage.getItem('registration') !== null) {
+    console.log(localStorage.getItem("registration"));
+    if (localStorage.getItem("registration") !== null) {
       //setData(JSON.parse(localStorage.getItem('registration'))
-      setData(getItem('registration'))
+      setData(getItem("registration"));
     }
-    console.log(data)
-  }, [])
+    console.log(data);
+  }, []);
 
   // atualiza a lista no storage
   useEffect(() => {
-    localStorage.setItem('registration', JSON.stringify(data))
-  }, [data])
+    localStorage.setItem("registration", JSON.stringify(data));
+  }, [data]);
 
   return (
     <ContainerResgistration>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
+        <FormContainer onSubmit={handleSubmit}>
+          <FormControl>
             <label htmlFor="">Nome</label>
             <input
               type="text"
@@ -62,8 +65,8 @@ export function Registration() {
               value={formState.nome}
               onChange={handleChange}
             />
-          </div>
-          <div>
+          </FormControl>
+          <FormControl>
             <label htmlFor="">Telefone</label>
             <input
               type="number"
@@ -71,8 +74,8 @@ export function Registration() {
               value={formState.phone}
               onChange={handleChange}
             />
-          </div>
-          <div>
+          </FormControl>
+          <FormControl>
             <label htmlFor="">Email</label>
             <input
               type="email"
@@ -80,19 +83,31 @@ export function Registration() {
               value={formState.email}
               onChange={handleChange}
             />
-          </div>
-          <div>
+          </FormControl>
+          <FormControl>
             <button>Enviar</button>
-          </div>
-        </form>
-        <div>
-          {data.map((item) => {
-            return(
-              <div>{item.nome}</div>
-            )
-          })}
-        </div>
-      </div>
+          </FormControl>
+        </FormContainer>
+        <TableContainer>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Telefone</th>
+              <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            {data.map((item) => {
+              return (
+                <tr key={item.id}>
+                  <td>{item.nome}</td>
+                  <td>{item.phone}</td>
+                  <td>{item.email}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </TableContainer>
     </ContainerResgistration>
   );
 }
