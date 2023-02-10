@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getItem, setItem } from "../../hooks/LocalStorage";
+import { IListProducts, IRegistration } from "../../interface/produts.model";
 import { TableContainer } from "../../styles/global";
 import { ContainerResgistration, FormContainer, FormControl, MessageWithout } from "./styles";
 
@@ -11,7 +12,13 @@ export function Registration() {
     email: "",
   };
 
-  const [data, setData] = useState([]);
+  const ALERT = {
+    required: 'Esse campo é obrigatório',
+    isFormat: 'Formato Inválido',
+    isEmail: 'Digite um email válido',
+  }
+
+  const [data, setData] = useState<IRegistration[]>([]);
   const [formState, SetFormState] = useState(initilForm);
 
   const handleChange = (event: any) => {
@@ -27,7 +34,35 @@ export function Registration() {
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    const objectNew = {
+    if (formState.nome === '') {
+      alert(ALERT.required);
+      return false;
+    }
+
+    if (formState.phone === '') {
+      alert(ALERT.required);
+      return false;
+    }
+
+    const isEmailValidade = /^[\w._-]+@[\w_.-]+\.[\w]{2,}/i.test(
+        formState.email
+      )
+
+    if (formState.email === '') {
+      alert(ALERT.required);
+      return false;
+    }
+
+    if (!isEmailValidade) {
+      alert(ALERT.isEmail);
+      return false;
+    }
+
+    //  const isEmailValidate = /^[\w._-]+@[\w_.-]+\.[\w]{2,}/i.test(
+    //   formState.supportEmail
+    // )
+
+    const objectNew:IRegistration = {
       id: uuidv4(),
       nome: formState.nome,
       phone: formState.phone,
@@ -80,7 +115,7 @@ export function Registration() {
           <FormControl>
             <label htmlFor="">Email</label>
             <input
-              type="email"
+              type="text"
               name="email"
               value={formState.email}
               onChange={handleChange}

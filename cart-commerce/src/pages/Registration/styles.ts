@@ -16,7 +16,10 @@ export const FormControl = styled.div`
 
   label {
     margin-right: 20px;
-    color: ${(props) => props.theme["gray-900"]}
+    color: ${(props) => props.theme["gray-900"]};
+    max-width: 65px;
+    display: inline-block;
+    width: 100%;
   }
 
   input {

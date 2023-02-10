@@ -13,3 +13,10 @@ export interface IStateCyty {
   state: string
   cyty: string
 }
+
+export interface IRegistration {
+  id: string,
+  nome: string,
+  phone: string,
+  email: string
+}
