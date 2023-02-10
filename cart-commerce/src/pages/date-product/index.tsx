@@ -9,7 +9,7 @@ export function DateProduct() {
     filter: "",
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: any) => {
     const target = event.currentTarget;
     const { value, name } = target;
 
