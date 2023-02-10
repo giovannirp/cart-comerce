@@ -5,6 +5,7 @@ import { Cart } from "./pages/Cart";
 import { Confere } from "./pages/Confere";
 import { DateProduct } from "./pages/date-product";
 import { Main } from './pages/Main/Main'
+import { NotFound } from "./pages/NotFound";
 import { Registration } from "./pages/Registration/Registration";
 
 
@@ -17,6 +18,7 @@ export function Router() {
         <Route path="/confere" element={<Confere />} />
         <Route path="/date-product" element={<DateProduct />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )
