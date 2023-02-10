@@ -32,9 +32,23 @@ export function Registration() {
     }
 
     setData([...data, objectNew]);
-
-    console.log(data)
+    setItem('registration', data)
   };
+
+  //carregar lista do storage
+  useEffect(() => {
+    console.log(localStorage.getItem('registration'))
+    if(localStorage.getItem('registration') !== null) {
+      //setData(JSON.parse(localStorage.getItem('registration'))
+      setData(getItem('registration'))
+    }
+    console.log(data)
+  }, [])
+
+  // atualiza a lista no storage
+  useEffect(() => {
+    localStorage.setItem('registration', JSON.stringify(data))
+  }, [data])
 
   return (
     <ContainerResgistration>
@@ -71,6 +85,13 @@ export function Registration() {
             <button>Enviar</button>
           </div>
         </form>
+        <div>
+          {data.map((item) => {
+            return(
+              <div>{item.nome}</div>
+            )
+          })}
+        </div>
       </div>
     </ContainerResgistration>
   );
