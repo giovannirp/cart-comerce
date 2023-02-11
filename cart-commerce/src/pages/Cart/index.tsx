@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { getItem, setItem } from "../../hooks/LocalStorage"
 import { IListProducts } from "../../interface/produts.model"
+import { MessageWithout } from "../../styles/global"
 import { priceFormatter } from '../../ultis/formatter'
 import { CardList, ContainerCart, ContentCart } from "./styles"
 
@@ -16,6 +17,9 @@ export function Cart() {
   return(
     <ContainerCart>
       <ContentCart>
+      {listProducts.length === 0 && (
+        <MessageWithout>Não existe, dados cadastrado !</MessageWithout>
+      )}
       {listProducts.map((item: IListProducts) => {
         return (
           <CardList key={item.id}>

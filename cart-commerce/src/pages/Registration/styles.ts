@@ -40,9 +40,3 @@ export const FormControl = styled.div`
     cursor: pointer;
   }
 `;
-
-export const MessageWithout = styled.div`
-  font-size: 16px;
-  color: ${(props) => props.theme["red-500"]};
-  margin-bottom: 20px;
-`;

@@ -51,3 +51,9 @@ export const TableContainer = styled.table`
     border-right: none;
   }
 `;
+
+export const MessageWithout = styled.div`
+  font-size: 16px;
+  color: ${(props) => props.theme["red-500"]};
+  margin-bottom: 20px;
+`;

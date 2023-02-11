@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getItem, setItem } from "../../hooks/LocalStorage";
 import { IListProducts, IRegistration } from "../../interface/produts.model";
-import { TableContainer } from "../../styles/global";
-import { ContainerResgistration, FormContainer, FormControl, MessageWithout } from "./styles";
+import { MessageWithout, TableContainer } from "../../styles/global";
+import { ContainerResgistration, FormContainer, FormControl } from "./styles";
 
 export function Registration() {
   const initilForm = {
@@ -76,6 +76,13 @@ export function Registration() {
     SetFormState({ ...initilForm })
   };
 
+  const addMaskPhone = (phoneNumber) => {
+    return phoneNumber
+    .replace(/\D/g, '')
+    .replace(/(\d{2})(\d)/, '($1) $2')
+    .replace(/(\d{5})(\d)/, '$1-$2')
+  }
+
   //carregar lista do storage
   useEffect(() => {
     // console.log(localStorage.getItem("registration"));
@@ -101,6 +108,7 @@ export function Registration() {
               name="nome"
               value={formState.nome}
               onChange={handleChange}
+              placeholder="Digite o nome"
             />
           </FormControl>
           <FormControl>
@@ -110,6 +118,7 @@ export function Registration() {
               name="phone"
               value={formState.phone}
               onChange={handleChange}
+              placeholder="Digite o telefone"
             />
           </FormControl>
           <FormControl>
@@ -119,6 +128,7 @@ export function Registration() {
               name="email"
               value={formState.email}
               onChange={handleChange}
+              placeholder="Digite o email"
             />
           </FormControl>
           <FormControl>
@@ -142,7 +152,7 @@ export function Registration() {
               return (
                 <tr key={item.id}>
                   <td>{item.nome}</td>
-                  <td>{item.phone}</td>
+                  <td>{addMaskPhone(item.phone)}</td>
                   <td>{item.email}</td>
                 </tr>
               );
