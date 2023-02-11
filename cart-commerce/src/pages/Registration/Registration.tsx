@@ -76,7 +76,7 @@ export function Registration() {
     SetFormState({ ...initilForm })
   };
 
-  const addMaskPhone = (phoneNumber) => {
+  const addMaskPhone = (phoneNumber: any) => {
     return phoneNumber
     .replace(/\D/g, '')
     .replace(/(\d{2})(\d)/, '($1) $2')
