@@ -13,10 +13,10 @@ export function Registration() {
   };
 
   const ALERT = {
-    required: 'Esse campo é obrigatório',
-    isFormat: 'Formato Inválido',
-    isEmail: 'Digite um email válido',
-  }
+    required: "Esse campo é obrigatório",
+    isFormat: "Formato Inválido",
+    isEmail: "Digite um email válido",
+  };
 
   const [data, setData] = useState<IRegistration[]>([]);
   const [formState, SetFormState] = useState(initilForm);
@@ -34,21 +34,21 @@ export function Registration() {
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    if (formState.nome === '') {
+    if (formState.nome === "") {
       alert(ALERT.required);
       return false;
     }
 
-    if (formState.phone === '') {
+    if (formState.phone === "") {
       alert(ALERT.required);
       return false;
     }
 
     const isEmailValidade = /^[\w._-]+@[\w_.-]+\.[\w]{2,}/i.test(
-        formState.email
-      )
+      formState.email
+    );
 
-    if (formState.email === '') {
+    if (formState.email === "") {
       alert(ALERT.required);
       return false;
     }
@@ -62,7 +62,7 @@ export function Registration() {
     //   formState.supportEmail
     // )
 
-    const objectNew:IRegistration = {
+    const objectNew: IRegistration = {
       id: uuidv4(),
       nome: formState.nome,
       phone: formState.phone,
@@ -71,17 +71,17 @@ export function Registration() {
 
     setData([...data, objectNew]);
     setItem("registration", data);
-    console.log(data)
+    console.log(data);
 
-    SetFormState({ ...initilForm })
+    SetFormState({ ...initilForm });
   };
 
   const addMaskPhone = (phoneNumber: any) => {
     return phoneNumber
-    .replace(/\D/g, '')
-    .replace(/(\d{2})(\d)/, '($1) $2')
-    .replace(/(\d{5})(\d)/, '$1-$2')
-  }
+      .replace(/\D/g, "")
+      .replace(/(\d{2})(\d)/, "($1) $2")
+      .replace(/(\d{5})(\d)/, "$1-$2");
+  };
 
   //carregar lista do storage
   useEffect(() => {
@@ -95,50 +95,52 @@ export function Registration() {
   // atualiza a lista no storage
   useEffect(() => {
     localStorage.setItem("registration", JSON.stringify(data));
-    console.log(data)
+    console.log(data);
   }, [data]);
 
   return (
     <ContainerResgistration>
-        <FormContainer onSubmit={handleSubmit}>
-          <FormControl>
-            <label htmlFor="">Nome</label>
-            <input
-              type="text"
-              name="nome"
-              value={formState.nome}
-              onChange={handleChange}
-              placeholder="Digite o nome"
-            />
-          </FormControl>
-          <FormControl>
-            <label htmlFor="">Telefone</label>
-            <input
-              type="number"
-              name="phone"
-              value={formState.phone}
-              onChange={handleChange}
-              placeholder="Digite o telefone"
-            />
-          </FormControl>
-          <FormControl>
-            <label htmlFor="">Email</label>
-            <input
-              type="text"
-              name="email"
-              value={formState.email}
-              onChange={handleChange}
-              placeholder="Digite o email"
-            />
-          </FormControl>
-          <FormControl>
-            <button>Enviar</button>
-          </FormControl>
-        </FormContainer>
+      <FormContainer onSubmit={handleSubmit}>
+        <FormControl>
+          <label htmlFor="">Nome</label>
+          <input
+            type="text"
+            name="nome"
+            value={formState.nome}
+            onChange={handleChange}
+            placeholder="Digite o nome"
+          />
+        </FormControl>
+        <FormControl>
+          <label htmlFor="">Telefone</label>
+          <input
+            type="number"
+            name="phone"
+            value={formState.phone}
+            onChange={handleChange}
+            placeholder="Digite o telefone"
+          />
+        </FormControl>
+        <FormControl>
+          <label htmlFor="">Email</label>
+          <input
+            type="text"
+            name="email"
+            value={formState.email}
+            onChange={handleChange}
+            placeholder="Digite o email"
+          />
+        </FormControl>
+        <FormControl>
+          <button>Enviar</button>
+        </FormControl>
+      </FormContainer>
 
-        {data.length === 0 && (
-          <MessageWithout>Não existe, dados cadastrado!</MessageWithout>
-        )}
+      {data.length === 0 && (
+        <MessageWithout>Não existe, dados cadastrado!</MessageWithout>
+      )}
+
+      {data.length > 0 && (
         <TableContainer>
           <thead>
             <tr>
@@ -146,8 +148,8 @@ export function Registration() {
               <th>Telefone</th>
               <th>Email</th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             {data.map((item) => {
               return (
                 <tr key={item.id}>
@@ -159,6 +161,7 @@ export function Registration() {
             })}
           </tbody>
         </TableContainer>
+      )}
     </ContainerResgistration>
   );
 }

@@ -10,7 +10,7 @@ export function Cart() {
 
   const removeCart = (item: IListProducts) => {
     const filterArray = listProducts.filter((e: IListProducts) => e.id !== item.id)
-    setListProducts(filterArray);
+    setListProducts(Array);
     setItem('cart-yt', filterArray)
   }
 

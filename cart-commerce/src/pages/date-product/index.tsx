@@ -52,19 +52,11 @@ export function DateProduct() {
 
   return (
     <ContainerProduct>
-      <div>
-        {/* <input
-          type="text"
-          value={formState.filter}
-          name="filter"
-          onChange={handleChange}
-          placeholder="Filtrar Listagem"
-        /> */}
-      </div>
       <InitButton onClick={() => handleInit()}>Carregar Todos</InitButton>
       <ButtonFilter onClick={() => handleStateFilterSP()}>
         Filtrar somente SP
       </ButtonFilter>
+
       <TableContainer>
         <thead>
           <tr>

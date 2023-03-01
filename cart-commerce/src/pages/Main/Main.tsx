@@ -18,6 +18,7 @@ export function Main() {
 
   const handleClick = (obj: IListProducts) => {
     const elementVar = cart.find((element) => element.id === obj.id);
+    
     if(elementVar) {
       const arrFilter = cart.filter((elementVew) => elementVew.id !== obj.id)
       console.log("arrfilter", arrFilter)
